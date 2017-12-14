@@ -78,15 +78,15 @@ public class JSONParser {
                                         break;
                                     case "Destinatario":
                                         String destinatario = packageToAdd.getString(field);
-                                        pacco.setNomeCorriere(destinatario);
+                                        pacco.setDestinatario(destinatario);
                                         break;
                                     case "Destinazione":
                                         String destinazione = packageToAdd.getString(field);
-                                        pacco.setNomeCorriere(destinazione);
+                                        pacco.setDestinazione(destinazione);
                                         break;
                                     case "Dimensione":
                                         String dimensione = packageToAdd.getString(field);
-                                        pacco.setNomeCorriere(dimensione);
+                                        pacco.setDimensione(dimensione);
                                         break;
                                     case "Stato":
                                         String stato = packageToAdd.getString(field);
@@ -95,9 +95,10 @@ public class JSONParser {
                                         break;
                                 }
                                 pacco.setIdPacco(currentPackageId);
-                                packages.add(pacco);
+
                                 addedPackages++;
                             }
+                            packages.add(pacco);
                         }
                     }
                 }
