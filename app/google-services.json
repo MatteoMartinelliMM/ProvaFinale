@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "630569558827-ukabtc7l9mal78fk85l3idl84l68v4vi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mateomartinelli.user2cadem.it.provafinale",
+            "certificate_hash": "2423f3bc1fe706305f8581a7b52995ff0ff00333"
+          }
+        },
+        {
           "client_id": "630569558827-c429uus6sf1fi5qhm6q64rsl16bhh6h0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -13,14 +13,37 @@ public class Pacco implements Serializable{
     private String deposito;
     private String destinazione;
     private String dimensione;
+    private String destinatario;
+    private String stato;
 
-    public Pacco(String idPacco, String nomeCorriere, String data, String deposito, String destinazione, String dimensione) {
+    public Pacco(String idPacco, String nomeCorriere, String data, String deposito, String destinazione, String dimensione, String destinatario,String stato) {
         this.idPacco = idPacco;
         this.nomeCorriere = nomeCorriere;
         this.data = data;
         this.deposito = deposito;
         this.destinazione = destinazione;
         this.dimensione = dimensione;
+        this.destinatario = destinatario;
+        this.stato = stato;
+    }
+
+    public Pacco() {
+    }
+
+    public String getDestinatario() {
+        return destinatario;
+    }
+
+    public void setDestinatario(String destinatario) {
+        this.destinatario = destinatario;
+    }
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
     }
 
     public String getIdPacco() {

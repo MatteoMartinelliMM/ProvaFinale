@@ -15,9 +15,10 @@ public class UtilitySharedPreference {
 
         public static final String LOGGED_USER = "LoggedUser";
         public static final String USER_TYPE = "UserType";
+    public static final String LAST_PACKAGE_TO_DELIVER = "lastPackageToDeliver";
 
 
-        public static boolean checkIfUserIsLogged(Context context){
+    public static boolean checkIfUserIsLogged(Context context){
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             return preferences.contains(LOGGED_USER);
         }
@@ -60,10 +61,10 @@ public class UtilitySharedPreference {
             return preferences.getString(groupName,"");
         }
 
-        public static void saveLastDeliverId(Context context, String groupName,String id){
+        public static void saveLastDeliverId(Context context, String id){
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(groupName,id);
+            editor.putString(LAST_PACKAGE_TO_DELIVER,id);
             editor.commit();
         }
         public static String getLastCommentId(Context context){

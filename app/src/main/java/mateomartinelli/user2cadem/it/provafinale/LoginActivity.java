@@ -21,6 +21,7 @@ import mateomartinelli.user2cadem.it.provafinale.Contoller.JSONParser;
 import mateomartinelli.user2cadem.it.provafinale.Contoller.RWObject;
 import mateomartinelli.user2cadem.it.provafinale.Contoller.RestCall;
 import mateomartinelli.user2cadem.it.provafinale.Contoller.TaskWaiting;
+import mateomartinelli.user2cadem.it.provafinale.Contoller.UtilitySharedPreference;
 import mateomartinelli.user2cadem.it.provafinale.Model.Corriere;
 import mateomartinelli.user2cadem.it.provafinale.Model.Users;
 import mateomartinelli.user2cadem.it.provafinale.Model.Utente;
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements TaskWaiting {
 
 
     public void login(View v){
-
+        dialog.onStart();
         String sUserName = userName.getText().toString();
         final String sPwd = pwd.getText().toString();
         String typeOfUser = "";
@@ -89,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements TaskWaiting {
                 if(pwdToCompare.equals(sPwd)){
                     Toast.makeText(getApplicationContext(),"Login Succesful",Toast.LENGTH_SHORT).show();
                     RWObject.writeObject(getApplicationContext(), LOGGED_USER,u);
+                    UtilitySharedPreference.addLoggedUser(getApplicationContext(),u);
                     if(u instanceof Corriere) intent = new Intent(getApplicationContext(),CorriereActivity.class);
                     else intent = new Intent(getApplicationContext(),UtenteActivity.class);
                     startActivity(intent);
