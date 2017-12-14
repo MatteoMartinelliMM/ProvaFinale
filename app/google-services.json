@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "630569558827",
+    "firebase_url": "https://provafinale-93015.firebaseio.com",
+    "project_id": "provafinale-93015",
+    "storage_bucket": "provafinale-93015.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630569558827:android:4344dddddb6c0c28",
+        "android_client_info": {
+          "package_name": "mateomartinelli.user2cadem.it.provafinale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630569558827-c429uus6sf1fi5qhm6q64rsl16bhh6h0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mateomartinelli.user2cadem.it.provafinale",
+            "certificate_hash": "ccc754b7ace8b0459fae982bca44435464b6fb16"
+          }
+        },
+        {
+          "client_id": "630569558827-lhcpmgigqh79ikvl2plinpsubc5himpr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxJEo8MiNTTNNPW_mgvVg8HAekl9mYd0Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630569558827-lhcpmgigqh79ikvl2plinpsubc5himpr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
