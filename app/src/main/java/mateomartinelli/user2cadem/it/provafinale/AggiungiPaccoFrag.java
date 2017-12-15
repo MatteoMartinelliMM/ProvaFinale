@@ -17,6 +17,9 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -32,7 +35,7 @@ import mateomartinelli.user2cadem.it.provafinale.Model.Corriere;
 import mateomartinelli.user2cadem.it.provafinale.Model.DataUtils;
 
 
-public class AggiungiPaccoFrag extends Fragment implements TaskWaiting, View.OnClickListener {
+public class AggiungiPaccoFrag extends Fragment implements TaskWaiting, View.OnClickListener,OnMapReadyCallback{
     private Spinner chooseCurrier,sizeChoose;
     private EditText address,pickingAddress;
     private TextView next,arrivalDate;
@@ -104,6 +107,7 @@ public class AggiungiPaccoFrag extends Fragment implements TaskWaiting, View.OnC
         arrivalDate = v.findViewById(R.id.deliverD);
         sizeChoose = v.findViewById(R.id.sizeChoose);
         pickingAddress = v.findViewById(R.id.picking);
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapFrag);
         return v;
     }
 
@@ -154,8 +158,12 @@ public class AggiungiPaccoFrag extends Fragment implements TaskWaiting, View.OnC
            corriereSubTree.child(currierName).child("Pacchi").child(nextId).setValue("blank");
 
            myRef.child("Users").child("Utente").child(user).child("Pacchi").child(nextId).setValue("blank");
-           Intent intent = new Intent(getActivity(),MapsActivity.class);
-           startActivity(intent);
+
        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
     }
 }
