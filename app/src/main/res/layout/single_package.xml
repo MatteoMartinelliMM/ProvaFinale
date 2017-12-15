@@ -9,14 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
-        app:cardElevation="3dp">
+        app:cardElevation="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/packageImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/dimension"
@@ -28,11 +30,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/imageView"
+                android:layout_toEndOf="@+id/packageImg"
                 android:text="DESTINATARIO:"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"/>
 
             <TextView
                 android:id="@+id/destinatario"
@@ -51,8 +55,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
                 android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/imageView"
+                android:layout_toEndOf="@+id/packageImg"
                 android:text="DEPOSITO:"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -74,8 +79,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView3"
                 android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/imageView"
+                android:layout_toEndOf="@+id/packageImg"
                 android:text="INDIRIZZO DI CONSEGNA:"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -84,9 +90,9 @@
                 android:id="@+id/indirizzo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView5"
                 android:layout_below="@+id/textView5"
                 android:layout_marginTop="2.5dp"
-                android:layout_toEndOf="@+id/imageView"
                 android:text="   Via martiri delle foibe 11"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -98,6 +104,7 @@
                 android:layout_alignStart="@+id/indirizzo"
                 android:layout_below="@+id/indirizzo"
                 android:text="CORRIERE:"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -106,9 +113,8 @@
                 android:id="@+id/currierName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/indirizzo"
-                android:layout_marginLeft="5dp"
-                android:layout_toEndOf="@+id/textView2"
+                android:layout_above="@+id/textView8"
+                android:layout_alignStart="@+id/deposito"
                 android:text="Ramirez"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -120,10 +126,10 @@
                 android:layout_alignStart="@+id/textView2"
                 android:layout_below="@+id/textView2"
                 android:text="DIMENSIONI:"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/dimension"
@@ -143,10 +149,10 @@
                 android:layout_alignStart="@+id/textView8"
                 android:layout_below="@+id/textView8"
                 android:text="DATA CONSEGNA:"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="5dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/dataConsegna"
@@ -161,7 +167,7 @@
                 android:layout_marginLeft="5dp"/>
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/ID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/textView3"
@@ -176,30 +182,31 @@
                 android:id="@+id/idPacco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_toEndOf="@+id/textView12"
+                android:layout_alignBaseline="@+id/ID"
+                android:layout_alignBottom="@+id/ID"
+                android:layout_toEndOf="@+id/ID"
+                android:layout_marginLeft="7dp"
                 android:text="1"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/textView10"
+                android:layout_above="@+id/stato"
+                android:layout_alignParentStart="true"
                 android:text="STATO:"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                android:layout_marginLeft="17.5dp"
-                android:layout_marginTop="5dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/stato"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/idPacco"
-                android:layout_below="@+id/textView15"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/textView10"
                 android:autoSizeMaxTextSize="@dimen/activity_horizontal_margin"
                 android:text="in consegna"
                 android:textColor="@android:color/black" />

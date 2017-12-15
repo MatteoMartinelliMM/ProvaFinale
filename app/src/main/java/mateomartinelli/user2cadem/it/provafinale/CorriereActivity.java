@@ -33,6 +33,7 @@ public class CorriereActivity extends AppCompatActivity implements TaskWaiting{
     private LinearLayoutManager lm;
     private SimplePackageAdapter packageAdapter;
     private ArrayList<String> idPacchi;
+    private String classCaller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +43,8 @@ public class CorriereActivity extends AppCompatActivity implements TaskWaiting{
         pacchi = new ArrayList<>();
         assignedPackage = findViewById(R.id.assignedPackage);
         lm = new LinearLayoutManager(this);
-
         final TaskWaiting taskWaiting = this;
-
+        classCaller = getClass().getSimpleName();
         dialog = new ProgressDialog(this);
         dialog.onStart();
 
@@ -68,7 +68,7 @@ public class CorriereActivity extends AppCompatActivity implements TaskWaiting{
                                 pacchi = JSONParser.getCurriersPackagesToDeliver(toParse, loggedCorriere.getIdPacchi());
                             }
                             taskWaiting.waitToComplete("");
-                            packageAdapter = new SimplePackageAdapter(pacchi);
+                            packageAdapter = new SimplePackageAdapter(pacchi,classCaller);
                             assignedPackage.setLayoutManager(lm);
                             assignedPackage.setAdapter(packageAdapter);
                         }

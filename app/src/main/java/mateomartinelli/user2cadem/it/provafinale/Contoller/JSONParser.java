@@ -56,56 +56,64 @@ public class JSONParser {
             while (keys.hasNext()) {
                 currentPackageId = keys.next();
                 if(addedPackages<idPacchi.size()) {
-                    for (String id : idPacchi) {
-                        if (currentPackageId.equals(id)) {
-                            JSONObject packageToAdd = packagesId.getJSONObject(currentPackageId);
-                            Iterator<String> packageFields = packageToAdd.keys();
-                            Pacco pacco = new Pacco();
-                            while (packageFields.hasNext()) {
-                                String field = packageFields.next();
-                                switch (field) {
-                                    case "Corriere":
-                                        String currierName = packageToAdd.getString(field);
-                                        pacco.setNomeCorriere(currierName);
-                                        break;
-                                    case "DataConsegna":
-                                        String dataConsegna = packageToAdd.getString(field);
-                                        pacco.setData(dataConsegna);
-                                        break;
-                                    case "Deposito":
-                                        String deposito = packageToAdd.getString(field);
-                                        pacco.setDeposito(deposito);
-                                        break;
-                                    case "Destinatario":
-                                        String destinatario = packageToAdd.getString(field);
-                                        pacco.setDestinatario(destinatario);
-                                        break;
-                                    case "Destinazione":
-                                        String destinazione = packageToAdd.getString(field);
-                                        pacco.setDestinazione(destinazione);
-                                        break;
-                                    case "Dimensione":
-                                        String dimensione = packageToAdd.getString(field);
-                                        pacco.setDimensione(dimensione);
-                                        break;
-                                    case "Stato":
-                                        String stato = packageToAdd.getString(field);
-                                        pacco.setStato(stato);
-                                    default:
-                                        break;
-                                }
-                                pacco.setIdPacco(currentPackageId);
-
-                                addedPackages++;
-                            }
-                            packages.add(pacco);
-                        }
-                    }
+                    addedPackages = tryToMatchCurrierIdAndPackageId(idPacchi, packages, currentPackageId, addedPackages, packagesId);
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return packages;
+    }
+
+    private static int tryToMatchCurrierIdAndPackageId(ArrayList<String> idPacchi, ArrayList<Pacco> packages, String currentPackageId, int addedPackages, JSONObject packagesId) throws JSONException {
+        for (String id : idPacchi) {
+            if (currentPackageId.equals(id)) {
+                JSONObject packageToAdd = packagesId.getJSONObject(currentPackageId);
+                Iterator<String> packageFields = packageToAdd.keys();
+                Pacco pacco = new Pacco();
+                while (packageFields.hasNext()) {
+                    String field = packageFields.next();
+                    setTheSinglePackage(packageToAdd, pacco, field);
+                    pacco.setIdPacco(currentPackageId);
+                    addedPackages++;
+                }
+                packages.add(pacco);
+            }
+        }
+        return addedPackages;
+    }
+
+    private static void setTheSinglePackage(JSONObject packageToAdd, Pacco pacco, String field) throws JSONException {
+        switch (field) {
+            case "Corriere":
+                String currierName = packageToAdd.getString(field);
+                pacco.setNomeCorriere(currierName);
+                break;
+            case "DataConsegna":
+                String dataConsegna = packageToAdd.getString(field);
+                pacco.setData(dataConsegna);
+                break;
+            case "Deposito":
+                String deposito = packageToAdd.getString(field);
+                pacco.setDeposito(deposito);
+                break;
+            case "Destinatario":
+                String destinatario = packageToAdd.getString(field);
+                pacco.setDestinatario(destinatario);
+                break;
+            case "Destinazione":
+                String destinazione = packageToAdd.getString(field);
+                pacco.setDestinazione(destinazione);
+                break;
+            case "Dimensione":
+                String dimensione = packageToAdd.getString(field);
+                pacco.setDimensione(dimensione);
+                break;
+            case "Stato":
+                String stato = packageToAdd.getString(field);
+                pacco.setStato(stato);
+            default:
+                break;
+        }
     }
 }
