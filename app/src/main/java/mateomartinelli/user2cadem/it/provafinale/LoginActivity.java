@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements TaskWaiting {
                 }
                 task.waitToComplete("");
                 if(pwdToCompare.equals(sPwd)){
-                    Toast.makeText(getApplicationContext(),"Login Succesful",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Login Succesfull",Toast.LENGTH_SHORT).show();
                     RWObject.writeObject(getApplicationContext(), LOGGED_USER,u);
                     UtilitySharedPreference.addLoggedUser(getApplicationContext(),u);
                     if(u instanceof Corriere) intent = new Intent(getApplicationContext(),CorriereActivity.class);

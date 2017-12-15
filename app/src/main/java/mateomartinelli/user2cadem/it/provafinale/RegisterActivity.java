@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             refDb.child(userTypeChoose).child(sUserName).child("pwd").setValue(sPwd);
             RWObject.writeObject(this, LOGGED_USER,user);
-            Toast.makeText(this,"Registration succesful",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Registration succesfull",Toast.LENGTH_SHORT).show();
             UtilitySharedPreference.addLoggedUser(this, user);
             if(user instanceof Corriere)
                 intent = new Intent(this,CorriereActivity.class);

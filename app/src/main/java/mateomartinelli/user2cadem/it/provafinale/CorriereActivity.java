@@ -1,6 +1,7 @@
 package mateomartinelli.user2cadem.it.provafinale;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -34,23 +35,44 @@ public class CorriereActivity extends AppCompatActivity implements TaskWaiting{
     private SimplePackageAdapter packageAdapter;
     private ArrayList<String> idPacchi;
     private String classCaller;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corriere);
         setTitle("Lista Pacchi");
 
-        pacchi = new ArrayList<>();
-        assignedPackage = findViewById(R.id.assignedPackage);
-        lm = new LinearLayoutManager(this);
-        final TaskWaiting taskWaiting = this;
+        startToInizializeTheRecycleView();
+
+        String userName = getTheLoggedCurrier();
+
         classCaller = getClass().getSimpleName();
+
+        final TaskWaiting taskWaiting = this;
         dialog = new ProgressDialog(this);
         dialog.onStart();
 
+        getTheCurrierPackageId(taskWaiting, userName);
+    }
+
+    private String getTheLoggedCurrier() {
         String userName = UtilitySharedPreference.getLoggedUsername(this);
         loggedCorriere = (Corriere) RWObject.readObject(this, LOGGED_USER);
+        return userName;
+    }
 
+    private void startToInizializeTheRecycleView() {
+        pacchi = new ArrayList<>();
+        assignedPackage = findViewById(R.id.assignedPackage);
+        lm = new LinearLayoutManager(this);
+    }
+
+    private void getTheCurrierPackageId(final TaskWaiting taskWaiting, String userName) {
         RestCall.get("Users/Corriere/"+userName+"/Pacchi.json", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -60,29 +82,33 @@ public class CorriereActivity extends AppCompatActivity implements TaskWaiting{
                     loggedCorriere.setIdPacchi(idPacchi);
                 }
                 if(loggedCorriere.getIdPacchi().size()!=0) {
-                    RestCall.get("Pacchi.json", new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            if (statusCode == 200) {
-                                String toParse = new String(responseBody);
-                                pacchi = JSONParser.getCurriersPackagesToDeliver(toParse, loggedCorriere.getIdPacchi());
-                            }
-                            taskWaiting.waitToComplete("");
-                            packageAdapter = new SimplePackageAdapter(pacchi,classCaller);
-                            assignedPackage.setLayoutManager(lm);
-                            assignedPackage.setAdapter(packageAdapter);
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                            taskWaiting.waitToComplete("ERROR: " + statusCode);
-                        }
-                    });
+                    getThePackageInfoFromRestCall(taskWaiting);
                 }
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 taskWaiting.waitToComplete("ERROR: "+statusCode);
+            }
+        });
+    }
+
+    private void getThePackageInfoFromRestCall(final TaskWaiting taskWaiting) {
+        RestCall.get("Pacchi.json", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                if (statusCode == 200) {
+                    String toParse = new String(responseBody);
+                    pacchi = JSONParser.getCurriersPackagesToDeliver(toParse, loggedCorriere.getIdPacchi());
+                }
+                taskWaiting.waitToComplete("");
+                packageAdapter = new SimplePackageAdapter(pacchi,classCaller);
+                assignedPackage.setLayoutManager(lm);
+                assignedPackage.setAdapter(packageAdapter);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                taskWaiting.waitToComplete("ERROR: " + statusCode);
             }
         });
     }

@@ -14,8 +14,9 @@ import java.io.ObjectOutputStream;
  */
 
 public class RWObject {
-    public final static String SAVE_POST = "savedPost";
     public final static String LOGGED_USER = "loggedUser";
+    public static final String PACK_TO_PASS = "PackToPass";
+
     public static Object readObject(Context context, String fileName) {
         FileInputStream inputStream = null;
         ObjectInputStream objReader = null;
