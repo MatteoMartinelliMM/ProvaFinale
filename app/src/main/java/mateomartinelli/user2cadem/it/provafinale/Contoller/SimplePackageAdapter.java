@@ -54,7 +54,7 @@ public class SimplePackageAdapter extends RecyclerView.Adapter<SimplePackageAdap
             indirizzoDestinazione = v.findViewById(R.id.indirizzo);
             stato = v.findViewById(R.id.stato);
             currierName = v.findViewById(R.id.currierName);
-            packageImg = v.findViewById(R.id.packageImg);
+            packageImg = v.findViewById(R.id.img);
         }
     }
 

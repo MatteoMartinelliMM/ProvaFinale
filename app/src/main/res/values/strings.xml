@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">ProvaFinale</string>
     <string name="title_activity_utente">UtenteActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_corrieri">Lista corrieri</string>
+    <string name="title_pacchi">I tuoi pacchi</string>
+    <string name="title_add_package">Aggiungi pacco</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

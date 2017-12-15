@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/packageImg"
+                android:id="@+id/img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/dimension"
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/packageImg"
+                android:layout_toEndOf="@+id/img"
                 android:text="DESTINATARIO:"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimaryDark"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView"
                 android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/packageImg"
+                android:layout_toEndOf="@+id/img"
                 android:text="DEPOSITO:"
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/colorPrimaryDark"
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView3"
                 android:layout_marginTop="5dp"
-                android:layout_toEndOf="@+id/packageImg"
+                android:layout_toEndOf="@+id/img"
                 android:text="INDIRIZZO DI CONSEGNA:"
                 android:layout_marginLeft="5dp"
                 android:textColor="@color/colorPrimaryDark"
