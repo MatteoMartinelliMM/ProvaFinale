@@ -15,4 +15,7 @@ public class Corriere extends Users implements Serializable {
     public Corriere(String userName) {
         super(userName);
     }
+
+    public Corriere() {
+    }
 }

@@ -119,15 +119,15 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:layout_marginTop="5dp"
-                android:id="@+id/textView24" />
+                android:id="@+id/nCorriere" />
 
             <TextView
                 android:id="@+id/deliveryDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView24"
-                android:layout_alignBottom="@+id/textView24"
-                android:layout_toEndOf="@+id/textView24"
+                android:layout_alignBaseline="@+id/nCorriere"
+                android:layout_alignBottom="@+id/nCorriere"
+                android:layout_toEndOf="@+id/nCorriere"
                 android:text="24/12/2017"
                 android:textColor="@android:color/black"
                 android:textSize="24sp"

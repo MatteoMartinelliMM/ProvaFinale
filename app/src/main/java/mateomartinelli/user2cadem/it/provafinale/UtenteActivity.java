@@ -3,6 +3,7 @@ package mateomartinelli.user2cadem.it.provafinale;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import mateomartinelli.user2cadem.it.provafinale.Contoller.FirebasePush;
 
 public class UtenteActivity extends AppCompatActivity{
 
@@ -88,6 +91,8 @@ public class UtenteActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utente);
         fm = getFragmentManager();
+        Intent intentDay = new Intent(this, FirebasePush.class);
+        startService(intentDay);
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

@@ -21,6 +21,9 @@ public abstract class Users implements Serializable{
         idPacchi = new ArrayList<String>();
     }
 
+    public Users() {
+    }
+
     public String getUserName() {
         return userName;
     }

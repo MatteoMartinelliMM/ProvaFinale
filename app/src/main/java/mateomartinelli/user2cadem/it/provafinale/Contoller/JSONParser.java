@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import mateomartinelli.user2cadem.it.provafinale.Model.Corriere;
 import mateomartinelli.user2cadem.it.provafinale.Model.Pacco;
 
 /**
@@ -49,13 +50,13 @@ public class JSONParser {
         ArrayList<Pacco> packages = new ArrayList<>();
         Iterator<String> keys;
         String currentPackageId = "";
-        int addedPackages=0;
+        int addedPackages = 0;
         try {
             JSONObject packagesId = new JSONObject(toParse);
             keys = packagesId.keys();
             while (keys.hasNext()) {
                 currentPackageId = keys.next();
-                if(addedPackages<idPacchi.size()) {
+                if (addedPackages < idPacchi.size()) {
                     addedPackages = tryToMatchCurrierIdAndPackageId(idPacchi, packages, currentPackageId, addedPackages, packagesId);
                 }
             }
@@ -115,5 +116,67 @@ public class JSONParser {
             default:
                 break;
         }
+    }
+
+    public static ArrayList<Corriere> getCurriers(String toParse) {
+        ArrayList<Corriere> toReturn = new ArrayList<>();
+        Iterator<String> nomi;
+        ArrayList<String> temp = new ArrayList<>();
+        try {
+            JSONObject corrieri = new JSONObject(toParse);
+            nomi = corrieri.keys();
+            while (nomi.hasNext()) {
+                String nome = nomi.next();
+                Corriere c = new Corriere();
+                c.setUserName(nome);
+                JSONObject pacchi = corrieri.getJSONObject(nome).getJSONObject("Pacchi");
+                Iterator<String> idPacchi = pacchi.keys();
+                while (idPacchi.hasNext()) {
+                    String currentId = idPacchi.next();
+                    temp.add(currentId);
+                }
+                c.setIdPacchi(temp);
+                toReturn.add(c);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return toReturn;
+    }
+
+    public static ArrayList<String> getCurriersName(String toParse){
+        ArrayList<String> names = new ArrayList<String>();
+        try {
+            JSONObject corrieri = new JSONObject(toParse);
+            Iterator<String> nomi = corrieri.keys();
+            while (nomi.hasNext()){
+                String nome = nomi.next();
+                names.add(nome);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return names;
+    }
+
+    public static String getNextAvailablePackageId(String toParse) {
+        String nextId = "00";
+        try {
+            JSONObject iDs = new JSONObject(toParse);
+            Iterator<String> iD = iDs.keys();
+            while (iD.hasNext())    nextId = iD.next();
+            try {
+                int toRise = Integer.parseInt(nextId);
+                toRise++;
+                if(toRise<10) nextId = "0"+toRise;
+            }catch (NumberFormatException e){
+                nextId = "15"; //da migliorare
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return  nextId;
     }
 }

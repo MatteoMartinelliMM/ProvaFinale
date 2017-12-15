@@ -48,12 +48,13 @@ public class ListaPacchiFrag extends Fragment implements TaskWaiting {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        loggedUtente= new Utente();
         String userName = null;
         gettingTheContext();
         pacchiUtente = new ArrayList<>();
         idPacchi = new ArrayList<>();
         taskWaiting = this;
+        dialog = new ProgressDialog(context);
         userName = UtilitySharedPreference.getLoggedUsername(context);
         loggedUtente = (Utente) RWObject.readObject(context, LOGGED_USER);
 
@@ -100,7 +101,7 @@ public class ListaPacchiFrag extends Fragment implements TaskWaiting {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_lista_pacchi, container, false);
-
+        getActivity().setTitle("I tuoi pacchi");
         return v;
     }
 

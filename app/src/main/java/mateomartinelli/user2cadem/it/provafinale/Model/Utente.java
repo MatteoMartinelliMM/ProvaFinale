@@ -17,4 +17,7 @@ public class Utente extends Users implements Serializable {
     public Utente(String userName) {
         super(userName);
     }
+
+    public Utente() {
+    }
 }

@@ -15,6 +15,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import mateomartinelli.user2cadem.it.provafinale.Contoller.FirebasePush;
 import mateomartinelli.user2cadem.it.provafinale.Contoller.JSONParser;
 import mateomartinelli.user2cadem.it.provafinale.Contoller.RWObject;
 import mateomartinelli.user2cadem.it.provafinale.Contoller.RestCall;
@@ -48,7 +49,8 @@ public class CorriereActivity extends AppCompatActivity implements TaskWaiting{
         setTitle("Lista Pacchi");
 
         startToInizializeTheRecycleView();
-
+        Intent intentDay = new Intent(this, FirebasePush.class);
+        startService(intentDay);
         String userName = getTheLoggedCurrier();
 
         classCaller = getClass().getSimpleName();

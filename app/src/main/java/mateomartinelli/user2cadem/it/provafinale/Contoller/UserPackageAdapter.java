@@ -1,5 +1,6 @@
 package mateomartinelli.user2cadem.it.provafinale.Contoller;
 
+import android.graphics.PorterDuff;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -75,17 +76,18 @@ public class UserPackageAdapter extends RecyclerView.Adapter<UserPackageAdapter.
         holder.currierName.setText(nomeCorriere);
         int truck_delivery = R.drawable.truck_delivery;
         holder.stato.setImageResource(truck_delivery);
-        /*switch (sStato.toLowerCase()){
+        int newColor;
+        switch (sStato.toLowerCase()){
             case "commissionato":
-                holder.stato.setColorFilter();
+                holder.stato.setColorFilter(R.color.red);
                 break;
             case "in consegna":
-                holder.stato.setColorFilter();
+                holder.stato.setColorFilter(R.color.colorPrimaryDark);
                 break;
             case "consegnato":
-                holder.stato.setColorFilter();
+                holder.stato.setColorFilter(R.color.colorPrimary);
                 break;
-        }*/
+        }
 
 
     }
