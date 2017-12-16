@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/truck"
     tools:context="mateomartinelli.user2cadem.it.provafinale.RegisterActivity">
 
     <RelativeLayout
@@ -56,8 +57,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="done"
-        android:text="sing up" />
+        android:text="sing up"
+        android:textColor="@color/cardview_light_background" />
 
     <TextView
         android:id="@+id/noMatch"

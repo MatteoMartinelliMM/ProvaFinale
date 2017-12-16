@@ -1,5 +1,6 @@
 package mateomartinelli.user2cadem.it.provafinale;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,9 @@ public class ConfirmPackageReceptionActivity extends AppCompatActivity {
 
     public void conferma(View v){
         myRef.child(idPacco).child("Stato").setValue("Consegnato");
+        Intent intent = new Intent();
+        setResult(2,intent);
+        finish();
 
     }
 

@@ -55,7 +55,7 @@ public class JSONParser {
             JSONObject packagesId = new JSONObject(toParse);
             keys = packagesId.keys();
             while (keys.hasNext()) {
-                currentPackageId = keys.next();
+                currentPackageId = keys.next(); //C
                 if (addedPackages < idPacchi.size()) {
                     addedPackages = tryToMatchCurrierIdAndPackageId(idPacchi, packages, currentPackageId, addedPackages, packagesId);
                 }
@@ -76,9 +76,10 @@ public class JSONParser {
                     String field = packageFields.next();
                     setTheSinglePackage(packageToAdd, pacco, field);
                     pacco.setIdPacco(currentPackageId);
-                    addedPackages++;
+
                 }
                 packages.add(pacco);
+                addedPackages++;
             }
         }
         return addedPackages;

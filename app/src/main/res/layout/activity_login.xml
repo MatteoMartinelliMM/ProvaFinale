@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/deliver_guy"
     tools:context="mateomartinelli.user2cadem.it.provafinale.LoginActivity">
 
     <RelativeLayout
@@ -38,8 +39,10 @@
             android:layout_below="@+id/pwd"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="66dp"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:onClick="login"
-            android:text="login" />
+            android:text="login"
+            android:textColor="@color/cardview_light_background" />
 
         <RadioGroup
             android:layout_width="wrap_content"
@@ -71,6 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:onClick="register"
-        android:text="registrati" />
+        android:text="registrati"
+        android:textColor="@color/cardview_light_background" />
 </RelativeLayout>

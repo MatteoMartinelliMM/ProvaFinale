@@ -30,12 +30,15 @@ import mateomartinelli.user2cadem.it.provafinale.Model.Utente;
 import static mateomartinelli.user2cadem.it.provafinale.Contoller.RWObject.LOGGED_USER;
 
 public class LoginActivity extends AppCompatActivity implements TaskWaiting {
-    private RadioButton utente,corriere;
+    private RadioButton utente, corriere;
     private EditText userName, pwd;
     private ProgressDialog dialog;
     private TaskWaiting task;
     private boolean pwdMatching;
     private Users u;
+    private String pwdToCompare, sPwd;
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,53 +53,43 @@ public class LoginActivity extends AppCompatActivity implements TaskWaiting {
         dialog = new ProgressDialog(this);
     }
 
-    public void register(View v){
-        Intent intent = new Intent(this,RegisterActivity.class);
+    public void register(View v) {
+        intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
 
-
-    public void login(View v){
+    public void login(View v) {
         dialog.onStart();
         String sUserName = userName.getText().toString();
-        final String sPwd = pwd.getText().toString();
+        sPwd = pwd.getText().toString();
         String typeOfUser = "";
         boolean user = utente.isChecked();
         boolean curr = corriere.isChecked();
-        if(!sUserName.equals("")){
-            if(user) {
+        if (!sUserName.equals("")) {
+            if (user) {
                 typeOfUser = "Utente/";
                 u = new Utente(sUserName);
-            }else if(curr){
+            } else if (curr) {
                 typeOfUser = "Corriere/";
                 u = new Corriere(sUserName);
             }
-            dialog.onStart();
             checkNStartLogin(sUserName, sPwd, typeOfUser);
         }
     }
 
     private void checkNStartLogin(String sUserName, final String sPwd, String typeOfUser) {
         RestCall.get("Users/" + typeOfUser + sUserName + ".json", new AsyncHttpResponseHandler() {
-            String pwdToCompare;
             Intent intent;
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if(statusCode==200){
+                if (statusCode == 200) {
                     String toParse = new String(responseBody);
                     pwdToCompare = JSONParser.getPwd(toParse);
                 }
                 task.waitToComplete("");
-                if(pwdToCompare.equals(sPwd)){
-                    Toast.makeText(getApplicationContext(),"Login Succesfull",Toast.LENGTH_SHORT).show();
-                    RWObject.writeObject(getApplicationContext(), LOGGED_USER,u);
-                    UtilitySharedPreference.addLoggedUser(getApplicationContext(),u);
-                    if(u instanceof Corriere) intent = new Intent(getApplicationContext(),CorriereActivity.class);
-                    else intent = new Intent(getApplicationContext(),UtenteActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+
             }
 
             @Override
@@ -109,9 +102,20 @@ public class LoginActivity extends AppCompatActivity implements TaskWaiting {
     @Override
     public void waitToComplete(String s) {
         dialog.dismiss();
-        if(!s.equals("")) Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
+        if (!s.equals("")) Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
         dialog.cancel();
+        if (pwdToCompare.equals(sPwd)) {
+            Toast.makeText(getApplicationContext(), "Login Succesfull", Toast.LENGTH_SHORT).show();
+            RWObject.writeObject(getApplicationContext(), LOGGED_USER, u);
+            UtilitySharedPreference.addLoggedUser(getApplicationContext(), u);
+            if (u instanceof Corriere)
+                intent = new Intent(getApplicationContext(), CorriereActivity.class);
+            else intent = new Intent(getApplicationContext(), UtenteActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
+
     private void hidingTheTitleBar() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
