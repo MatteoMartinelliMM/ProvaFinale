@@ -46,6 +46,9 @@ public class CorriereActivity extends AppCompatActivity implements TaskWaiting{
         if(requestCode==1){
             if(resultCode==2)
                 packageAdapter.notifyDataSetChanged();
+                dialog.onStart();
+                TaskWaiting waiting = this;
+                getThePackageInfoFromRestCall(waiting);
         }
     }
     @Override
