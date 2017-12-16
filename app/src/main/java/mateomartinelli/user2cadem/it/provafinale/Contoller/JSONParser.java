@@ -171,6 +171,7 @@ public class JSONParser {
                 int toRise = Integer.parseInt(nextId);
                 toRise++;
                 if(toRise<10) nextId = "0"+toRise;
+                else nextId = Integer.toString(toRise);
             }catch (NumberFormatException e){
                 nextId = "15"; //da migliorare
             }

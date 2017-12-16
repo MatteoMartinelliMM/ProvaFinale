@@ -1,5 +1,8 @@
 package mateomartinelli.user2cadem.it.provafinale.Contoller;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +24,7 @@ import mateomartinelli.user2cadem.it.provafinale.R;
 public class UserPackageAdapter extends RecyclerView.Adapter<UserPackageAdapter.ViewHolder> {
 
     ArrayList<Pacco> packages;
-
+    private Context context;
 
     public UserPackageAdapter() {
         packages = new ArrayList<Pacco>();
@@ -52,6 +55,7 @@ public class UserPackageAdapter extends RecyclerView.Adapter<UserPackageAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = null;
+        context = parent.getContext();
         if (parent != null)
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_package_for_user, null);
         ViewHolder viewHolder = new ViewHolder(v);
@@ -74,8 +78,8 @@ public class UserPackageAdapter extends RecyclerView.Adapter<UserPackageAdapter.
         holder.packagedId.setText(idPack);
         loadBoxesDimensionImage(holder, dim);
         holder.currierName.setText(nomeCorriere);
-        int truck_delivery = R.drawable.truck_delivery;
-        holder.stato.setImageResource(truck_delivery);
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.truck_delivery);
+        holder.stato.setImageBitmap(bitmap);
         int newColor;
         switch (sStato.toLowerCase()){
             case "commissionato":

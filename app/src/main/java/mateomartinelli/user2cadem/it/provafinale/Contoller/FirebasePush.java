@@ -105,7 +105,7 @@ public class FirebasePush extends Service {
     }
 
     public void sendNotification(Intent intent, String title, String body) {
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher_round);
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.truck_delivery);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent activity = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 

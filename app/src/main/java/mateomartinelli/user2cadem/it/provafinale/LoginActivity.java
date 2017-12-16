@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements TaskWaiting {
             startService(intentDay);
             startActivity(intent);
             finish();
-        }
+        }else Toast.makeText(this,"Password errata",Toast.LENGTH_SHORT).show();
     }
 
     private void hidingTheTitleBar() {

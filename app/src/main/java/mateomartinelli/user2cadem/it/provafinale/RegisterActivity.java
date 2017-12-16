@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         sUserName = userName.getText().toString();
         String userTypeChoose = userType.getSelectedItem().toString();
         Intent intent;
-        if(sPwd.equals(sPwd2)){
+        if(sPwd.equals(sPwd2) && !sUserName.equals("") && !sPwd.equals("")){
 
             if(userTypeChoose.equals("Corriere")) user = new Corriere(sUserName);
             else user = new Utente(sUserName);
@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                 intent = new Intent(this,UtenteActivity.class);
             startActivity(intent);
             finish();
-        }else noMatch.setText("Password non corrispondenti");
+        }else Toast.makeText(this,"Prima di registrarsi compilare tutti i campi",Toast.LENGTH_SHORT).show();
 
     }
 }
