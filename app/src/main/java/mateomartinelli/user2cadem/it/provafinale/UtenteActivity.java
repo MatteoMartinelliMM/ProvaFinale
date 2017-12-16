@@ -1,6 +1,5 @@
 package mateomartinelli.user2cadem.it.provafinale;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -8,12 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import mateomartinelli.user2cadem.it.provafinale.Contoller.FirebasePush;
+import mateomartinelli.user2cadem.it.provafinale.Contoller.UtilitySharedPreference;
 
 public class UtenteActivity extends AppCompatActivity {
 
@@ -24,6 +26,29 @@ public class UtenteActivity extends AppCompatActivity {
     private FragmentTransaction ft;
     private boolean start = false;
     private BottomNavigationView navigation;
+    private boolean done;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                done = UtilitySharedPreference.logoutTheCurrentUser(this);
+                Intent intent = new Intent(this, LoginActivity.class);
+                stopService(new Intent(this, FirebasePush.class));
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,8 +89,9 @@ public class UtenteActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
+  /*  @Override
+
+    public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 x1 = event.getX();
@@ -78,42 +104,38 @@ public class UtenteActivity extends AppCompatActivity {
                         Toast.makeText(this, "left2right swipe", Toast.LENGTH_SHORT).show();
                         int currentFrame = navigation.getSelectedItemId();
                         switch (currentFrame) {
-                            case R.id.navigation_home:
-                                navigation.setSelectedItemId(R.id.navigation_dashboard);
-                                return true;
-                            case R.id.navigation_dashboard:
-                                navigation.setSelectedItemId(R.id.navigation_notifications);
-                                return true;
-                            default:
-                                return false;
-                        }
-                    } else {
-                        Toast.makeText(this, "right2left swipe", Toast.LENGTH_SHORT).show();
-                        int currentFrame = navigation.getSelectedItemId();
-                        switch (currentFrame) {
                             case R.id.navigation_dashboard:
                                 navigation.setSelectedItemId(R.id.navigation_home);
                                 return true;
                             case R.id.navigation_notifications:
                                 navigation.setSelectedItemId(R.id.navigation_dashboard);
                                 return true;
-                            default:
-                                return false;
                         }
+
+                    }
+                } else {
+                    Toast.makeText(this, "right2left swipe", Toast.LENGTH_SHORT).show();
+                    int currentFrame = navigation.getSelectedItemId();
+
+                    switch (currentFrame) {
+                        case R.id.navigation_home:
+                            navigation.setSelectedItemId(R.id.navigation_dashboard);
+                            return true;
+                        case R.id.navigation_dashboard:
+                            navigation.setSelectedItemId(R.id.navigation_notifications);
+                            return true;
                     }
 
                 }
         }
-        return super.onTouchEvent(event);
-    }
+        return super.dispatchTouchEvent(event);
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utente);
         fm = getFragmentManager();
-        Intent intentDay = new Intent(this, FirebasePush.class);
-        startService(intentDay);
         mTextMessage = (TextView) findViewById(R.id.message);
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -122,5 +144,6 @@ public class UtenteActivity extends AppCompatActivity {
 
 
     }
+
 
 }

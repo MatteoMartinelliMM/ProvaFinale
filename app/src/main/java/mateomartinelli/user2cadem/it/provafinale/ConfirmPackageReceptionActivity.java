@@ -26,7 +26,7 @@ public class ConfirmPackageReceptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_package_reception);
-        setTitle("Conferma di consegna a"+ UtilitySharedPreference.getUserReciver(this));
+        setTitle("Conferma di consegna a  "+ UtilitySharedPreference.getUserReciver(this));
 
         db = FirebaseDatabase.getInstance();
         myRef = db.getReferenceFromUrl("https://provafinale-93015.firebaseio.com/Pacchi");

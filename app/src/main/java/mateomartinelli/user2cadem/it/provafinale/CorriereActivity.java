@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.FirebaseDatabase;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import java.util.ArrayList;
@@ -45,6 +48,28 @@ public class CorriereActivity extends AppCompatActivity implements TaskWaiting{
                 packageAdapter.notifyDataSetChanged();
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                UtilitySharedPreference.logoutTheCurrentUser(this);
+                Intent intent = new Intent(this, LoginActivity.class);
+                stopService(new Intent(this, FirebasePush.class));
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +78,6 @@ public class CorriereActivity extends AppCompatActivity implements TaskWaiting{
         setTitle("Lista Pacchi");
 
         startToInizializeTheRecycleView();
-        Intent intentDay = new Intent(this, FirebasePush.class);
-        startService(intentDay);
         String userName = getTheLoggedCurrier();
 
         classCaller = getClass().getSimpleName();

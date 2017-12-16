@@ -93,5 +93,13 @@ public class UtilitySharedPreference {
         return preferences.getString(DESTINATARIO, "");
     }
 
+    public static boolean logoutTheCurrentUser(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(LOGGED_USER);
+        editor.commit();
+        return checkIfUserIsLogged(context);
+    }
+
 
 }

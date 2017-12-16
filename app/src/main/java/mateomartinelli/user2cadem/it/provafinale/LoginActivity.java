@@ -111,6 +111,8 @@ public class LoginActivity extends AppCompatActivity implements TaskWaiting {
             if (u instanceof Corriere)
                 intent = new Intent(getApplicationContext(), CorriereActivity.class);
             else intent = new Intent(getApplicationContext(), UtenteActivity.class);
+            Intent intentDay = new Intent(this, FirebasePush.class);
+            startService(intentDay);
             startActivity(intent);
             finish();
         }
